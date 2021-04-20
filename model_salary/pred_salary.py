@@ -111,7 +111,7 @@ def app():
                      'Work_Company_Country',
                      'Work_Company_PT_District']
 
-        if st.button('Find Predicted Salary'):
+        if st.button('Predict Salary'):
             result = get_predict(row, oe, model, feat_cols)
             st.write(f'According to the inserted profile, the salary should be around: `{result}€`')
 

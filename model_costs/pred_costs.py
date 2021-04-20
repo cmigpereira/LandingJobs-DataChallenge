@@ -126,7 +126,7 @@ def app():
                      'Employer_Org_Type',
                      'Work_Company_Country']
 
-        if st.button('Predict Salary Costs'):
+        if st.button('Predict Costs'):
             result = get_predict(row, oe, model, feat_cols)
             st.write(f'According to the inserted profiles, the salary should be around: `{result}`€')
 

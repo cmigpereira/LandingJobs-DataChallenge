@@ -78,7 +78,7 @@ def app():
                      'Job_Motivator_Flexible_schedule',
                      'Job_Perk_Stock_options_or_shares']
 
-        if st.button('Find Best Industry'):
+        if st.button('Recommend Industry'):
             result = get_predict(row, le, model, feat_cols)
             st.write(f'According to your profile and preferences, the best industry to work in is: `{result}`')
 
