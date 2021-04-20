@@ -66,13 +66,13 @@ def get_random_string():
 
 @st.cache(hash_funcs={xgb.Booster: id})
 def load_data():
-    with open('./data/company_salary_ordinalencoder.joblib', 'rb') as fl:
+    with open('./model_costs/data/company_salary_ordinalencoder.joblib', 'rb') as fl:
         oe = joblib.load(fl)
-    with open('./data/company_salary_features.json', 'r', encoding='utf8') as ff:
+    with open('./model_costs/data/company_salary_features.json', 'r', encoding='utf8') as ff:
         features = json.load(ff)
 
     model = xgb.Booster()
-    model.load_model('./data/company_salary_model.model')
+    model.load_model('./model_costs/data/company_salary_model.model')
 
     return oe, features, model
 
@@ -88,7 +88,7 @@ def get_predict(row, oe, model, feat_cols):
 
 
 def app():
-    st.header('Salary Costs Prediction as a future Employee')
+    st.header('Salary Costs Prediction with a future Employee')
     
     st.text("\n")
     st.write("This page helps you predict the costs your company will have with an employee.")

@@ -51,14 +51,13 @@ def get_random_string():
 
 @st.cache(hash_funcs={xgb.Booster: id})
 def load_data():
-
-    with open('./data/employee_salary_ordinalencoder.joblib', 'rb') as fl:
+    with open('./model_salary/data/employee_salary_ordinalencoder.joblib', 'rb') as fl:
         oe = joblib.load(fl)
-    with open('./data/employee_salary_features.json', 'r', encoding='utf8') as ff:
+    with open('./model_salary/data/employee_salary_features.json', 'r', encoding='utf8') as ff:
         features = json.load(ff)
 
     model = xgb.Booster()
-    model.load_model('./data/employee_salary_model.model')
+    model.load_model('./model_salary/data/employee_salary_model.model')
 
     return oe, features, model
 

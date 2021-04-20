@@ -26,9 +26,9 @@ def get_random_string():
 
 @st.cache
 def load_data():
-    with open('./data/company_churn.pkl', 'rb') as fm:
+    with open('./model_churn/data/company_churn_model.pkl', 'rb') as fm:
         model = joblib.load(fm)
-    with open('./data/company_churn_variables.json', 'r', encoding='utf8') as ff:
+    with open('./model_churn/data/company_churn_variables.json', 'r', encoding='utf8') as ff:
         features = json.load(ff)
 
     return features, model

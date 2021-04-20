@@ -26,11 +26,11 @@ def get_random_string():
 
 @st.cache
 def load_data():
-    with open('./data/worklife_labelencoder.joblib', 'rb') as fl:
+    with open('./model_industry/data/employee_industry_labelencoder.joblib', 'rb') as fl:
         le = joblib.load(fl)
-    with open('./data/worklife_model.joblib', 'rb') as fm:
+    with open('./model_industry/data/employee_industry_model.joblib', 'rb') as fm:
         model = joblib.load(fm)
-    with open('./data/worklife_features.json', 'r', encoding='utf8') as ff:
+    with open('./model_industry/data/employee_industry_features.json', 'r', encoding='utf8') as ff:
         features = json.load(ff)
 
     return le, features, model
