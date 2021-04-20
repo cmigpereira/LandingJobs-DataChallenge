@@ -51,7 +51,7 @@ def app():
     st.write("This page recommends best industry to work in depending on the entered profile and preferences.")
     st.markdown("***")
 
-    left_column, center_column, right_column = st.beta_columns((1, 1, 1))
+    left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
 
     le, features, model = load_data()
     
@@ -76,12 +76,13 @@ def app():
                      'Job_Motivator_Flexible_schedule',
                      'Job_Perk_Stock_options_or_shares']
 
-    with center_column:
         st.write('Add your profile and preferences on the left and press:')
         if st.button('Find Best Industry'):
             result = get_predict(row, le, model, feat_cols)
             st.write(f'According to your profile and preferences, the best industry to work in is: `{result}`')
 
+        st.markdown("***")
+    
     with right_column:
         image = Image.open('images/question-mark.jpg')
         image = image.resize((125, 125), Image.ANTIALIAS)

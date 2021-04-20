@@ -70,7 +70,7 @@ def get_predict(row, oe, model, feat_cols):
 
     pred = model.predict(df)
 
-    return round(int(pred[0]), -3)
+    return round(int(pred[0]), -2)
 
 
 def app():
@@ -80,7 +80,7 @@ def app():
     st.write("This page suggests a salary according to the inserted profile.")
     st.markdown("***")
 
-    left_column, center_column, right_column = st.beta_columns((1, 1, 1))
+    left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
     
     oe, features, model = load_data()
 
@@ -110,12 +110,13 @@ def app():
                      'Work_Company_Country',
                      'Work_Company_PT_District']
 
-    with center_column:
         st.write('Add your profile and preferences on the left and press:')
         if st.button('Find Predicted Salary'):
             result = get_predict(row, oe, model, feat_cols)
             st.write(f'According to the inserted profile, the salary should be around: `{result}€`')
 
+        st.markdown("***")
+        
     with right_column:
         image = Image.open('images/question-mark.jpg')
         image = image.resize((125, 125), Image.ANTIALIAS)

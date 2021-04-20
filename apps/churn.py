@@ -66,7 +66,7 @@ def app():
     st.write("This page allows companies to predict the probability of an employee, given certain profile, churning the company in the next 6 months.")
     st.markdown("***")
 
-    left_column, center_column, right_column = st.beta_columns((1, 1, 1))
+    left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
 
     features, model = load_data()
 
@@ -90,7 +90,6 @@ def app():
                      'Residence_District',
                      'Employer_Industry']
 
-    with center_column:
         st.write('Add employee profile on the left and press:')
         if st.button('Predict churn'):
             lift, output = get_predict(row, model, feat_cols)
@@ -100,7 +99,9 @@ def app():
             else:
                 st.write(
                     f'According to the employee profile, it is predicted that he/she `wants to stay` in your company.')
-
+        
+        st.markdown("***")
+        
     with right_column:
         image = Image.open('images/question-mark.jpg')
         image = image.resize((125, 125), Image.ANTIALIAS)
