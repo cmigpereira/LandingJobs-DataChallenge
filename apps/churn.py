@@ -14,13 +14,13 @@ warnings.filterwarnings('ignore')
 @st.cache(ttl=10)
 def get_random_string():
     sentences = [
-        '`Lisboa` was the `Residence District` most reported in the 2021 Tech Careers Survey PT?',
-        '`34 years` old was the average `Age` of the workers that answered the 2021 Tech Careers Survey PT?',
-        'workers in the `Security` industry reported the largest average value for `Salary Fairness` in the 2021 Tech Careers Survey PT?',
-        'workers in the `Nonprofit` industry reported the largest average value for `Training/Development programs at work` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Real estate` industry reported the largest average value reported for `Computer/Office equipment allowance` as job perk in the 2021 Tech Careers Survey PT?',
-        'workers in the `Data and analytics` industry reported the largest average value reported for `Flexible schedule` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Security` industry reported the largest average value reported for `Stock options or shares` as job perk in the 2021 Tech Careers Survey PT?']
+        '`Younger` people are more likely to churn in the next few months',
+        'people who live in `Beja` are the ones who most want to leave the company where they work, followed by those who live in `Bragança`?', 
+        'one of the main factors that lead people to churn is `Salary Fairness`?', 
+        'one of the main factors that lead people to churn is the `Salary Change` in recent months?', 
+        '`Females` are more likely to leave their jobs in the next few months than `Males`?', 
+        'people working `In-Office` are more likely to leave their jobs than those working in `Full Remote`?', 
+        'people working in `Consultancy` industry are more willing to churn than people working in other industries?']
     return random.choice(sentences)
 
 
