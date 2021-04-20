@@ -15,12 +15,12 @@ warnings.filterwarnings('ignore')
 def get_random_string():
     sentences = [
         '`Lisboa` was the `Residence District` most reported in the 2021 Tech Careers Survey PT?',
-        '`34 years` old was the average `Age` of the workers that answered the 2021 Tech Careers Survey PT?',
+        '`34 years old` was the average `Age` of the workers that answered the 2021 Tech Careers Survey PT?',
         'workers in the `Security` industry reported the largest average value for `Salary Fairness` in the 2021 Tech Careers Survey PT?',
         'workers in the `Nonprofit` industry reported the largest average value for `Training/Development programs at work` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Real estate` industry reported the largest average value reported for `Computer/Office equipment allowance` as job perk in the 2021 Tech Careers Survey PT?',
-        'workers in the `Data and analytics` industry reported the largest average value reported for `Flexible schedule` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Security` industry reported the largest average value reported for `Stock options or shares` as job perk in the 2021 Tech Careers Survey PT?']
+        'workers in the `Real estate` industry reported the largest average value for `Computer/Office equipment allowance` as job perk in the 2021 Tech Careers Survey PT?',
+        'workers in the `Data and analytics` industry reported the largest average value for `Flexible schedule` as job motivator in the 2021 Tech Careers Survey PT?',
+        'workers in the `Security` industry reported the largest average value for `Stock options or shares` as job perk in the 2021 Tech Careers Survey PT?']
     return random.choice(sentences)
 
 
@@ -49,14 +49,15 @@ def app():
 
     le, features, model = load_data()
 
-    st.write("This page recommends best industries to work in depending on the configurations selected by them.")
+    st.write("This page recommends best industries to work in depending on the entered profile and preferences.")
+    st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
 
     with left_column:
         residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
                                           format_func=lambda x: 'Residence District' if x == '' else x)
-        age = st.number_input("Age (Years)", 16, 67, 42, 1)
+        age = st.slider("Age (Years)", 16, 67, 42, 1)
         salary_fairness = st.slider("Salary Fairness", 1, 7, 4, 1)
         training = st.slider("Training/Development programs at work", 1, 7, 4, 1)
         equipment_allowance = st.slider("Allowance for Computer / Office equip", 1, 7, 4, 1)
@@ -78,7 +79,7 @@ def app():
         st.write('Add your profile and preferences on the left and press:')
         if st.button('Find Best Industry'):
             result = get_predict(row, le, model, feat_cols)
-            st.write(f'According to your profile and preferences, the best industry to work is: `{result}`')
+            st.write(f'According to your profile and preferences, the best industry to work in is: `{result}`')
 
     with right_column:
         image = Image.open('images/question-mark.jpg')
