@@ -5,10 +5,50 @@ import random
 from PIL import Image
 import joblib
 import json
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OrdinalEncoder
 import warnings
+import xgboost as xgb
 
 warnings.filterwarnings('ignore')
+
+
+def process_user_input(df, oe):
+    categorical_list = ['Job_Role', 'Employer_Industry', 'Employer_Org_Type',
+                        'Work_Company_Country']
+
+    df[categorical_list] = oe.transform(df[categorical_list])
+
+    df.loc[df['Working_Experience'] == 'No working experience',
+           'Working_Experience'] = 0
+    df.loc[df['Working_Experience'] == 'Less than 1 year',
+           'Working_Experience'] = 1
+    df.loc[df['Working_Experience'] == 'Between 1 - 3 years',
+           'Working_Experience'] = 2
+    df.loc[df['Working_Experience'] == 'Between 3 - 6 years',
+           'Working_Experience'] = 3
+    df.loc[df['Working_Experience'] == 'Between 6 - 9 years',
+           'Working_Experience'] = 4
+    df.loc[df['Working_Experience'] == 'More than 9 years',
+           'Working_Experience'] = 5
+    df['Working_Experience'] = df['Working_Experience'].astype(int)
+
+    df.loc[df['Employer_Size'] == 'Less than 10 employees',
+           'Employer_Size'] = 0
+    df.loc[df['Employer_Size'] == '10 - 19 employees',
+           'Employer_Size'] = 1
+    df.loc[df['Employer_Size'] == '20 - 99 employees',
+           'Employer_Size'] = 2
+    df.loc[df['Employer_Size'] == '100 - 499 employees',
+           'Employer_Size'] = 3
+    df.loc[df['Employer_Size'] == '500 - 999 employees',
+           'Employer_Size'] = 4
+    df.loc[df['Employer_Size'] == '1000 - 4.999 employees',
+           'Employer_Size'] = 5
+    df.loc[df['Employer_Size'] == 'More than 5.000 employees',
+           'Employer_Size'] = 6
+    df['Employer_Size'] = df['Employer_Size'].astype(int)
+
+    return df
 
 
 @st.cache(ttl=10)
@@ -24,61 +64,70 @@ def get_random_string():
     return random.choice(sentences)
 
 
-@st.cache
+@st.cache(hash_funcs={xgb.Booster: id})
 def load_data():
-    with open('./data/worklife_labelencoder.joblib', 'rb') as fl:
-        le = joblib.load(fl)
-    with open('./data/worklife_model.joblib', 'rb') as fm:
-        model = joblib.load(fm)
-    with open('./data/worklife_features.json', 'r', encoding='utf8') as ff:
+    with open('./data/company_salary_ordinalencoder.joblib', 'rb') as fl:
+        oe = joblib.load(fl)
+    with open('./data/company_salary_features.json', 'r', encoding='utf8') as ff:
         features = json.load(ff)
 
-    return le, features, model
+    model = xgb.Booster()
+    model.load_model('./data/company_salary_model.model')
+
+    return oe, features, model
 
 
-def get_predict(row, le, model, feat_cols):
+def get_predict(row, oe, model, feat_cols):
     df = pd.DataFrame([row], columns=feat_cols)
-    df['Residence_District'] = df['Residence_District'].astype('category')
+    df = process_user_input(df, oe)
+    df = xgb.DMatrix(df.values)
+
     pred = model.predict(df)
 
-    return le.inverse_transform(pred)[0]
+    return round(int(pred[0]), -3)
 
 
 def app():
-    st.header('Best industry to work in')
+    st.header('Salary Costs Prediction as a future Employee')
 
-    le, features, model = load_data()
+    oe, features, model = load_data()
 
-    st.write("This pages enable companies to .")
+    st.write("This page helps you predict the costs you'll engage with an employee.")
+    st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
 
     with left_column:
-        residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
-                                          format_func=lambda x: 'Residence District' if x == '' else x)
-        age = st.number_input("Age (Years)", 16, 67, 42, 1)
-        salary_fairness = st.slider("Salary Fairness", 1, 7, 4, 1)
-        training = st.slider("Training/Development programs at work", 1, 7, 4, 1)
-        equipment_allowance = st.slider("Allowance for Computer / Office equip", 1, 7, 4, 1)
-        flexible_schedule = st.slider('Flexible schedule', 1, 7, 4, 1)
-        stock_options = st.slider("Stock options or shares", 1, 7, 4, 1)
+        age = st.slider("Age (Years)", 16, 67, 42, 1)
+        job_role = st.selectbox("Job Role", (sorted(features['Job_Role'])),
+                                format_func=lambda x: 'Job Role' if x == '' else x)
+        employer_industry = st.selectbox("Employer Industry", (sorted(features['Employer_Industry'])),
+                                         format_func=lambda x: 'Employer Industry' if x == '' else x)
+        working_experience = st.selectbox("Working Experience", (sorted(features['Working_Experience'])),
+                                          format_func=lambda x: 'Working Experience' if x == '' else x)
+        employer_size = st.selectbox("Employer Size", (sorted(features['Employer_Size'])),
+                                     format_func=lambda x: 'Employer Size' if x == '' else x)
+        employer_org_type = st.selectbox("Employer Org Type", (sorted(features['Employer_Org_Type'])),
+                                         format_func=lambda x: 'Employer Org Type' if x == '' else x)
+        work_company_country = st.selectbox("Work Company Country", (sorted(features['Work_Company_Country'])),
+                                            format_func=lambda x: 'Work Company Country' if x == '' else x)
 
-        row = [residence_district, age, salary_fairness, training, equipment_allowance, flexible_schedule,
-               stock_options]
+        row = [age, job_role, employer_industry, working_experience,
+               employer_size, employer_org_type, work_company_country]
 
-        feat_cols = ['Residence_District',
-                     'Age',
-                     'Salary_Fairness',
-                     'Job_Motivator_Training/Development_programs_at_work',
-                     'Job_Perk_Computer/_Office_equipment_allowance',
-                     'Job_Motivator_Flexible_schedule',
-                     'Job_Perk_Stock_options_or_shares']
+        feat_cols = ['Age',
+                     'Job_Role',
+                     'Employer_Industry',
+                     'Working_Experience',
+                     'Employer_Size',
+                     'Employer_Org_Type',
+                     'Work_Company_Country']
 
     with center_column:
-        st.write('Add your profile and preferences on the left and press:')
-        if st.button('Find Best Industry'):
-            result = get_predict(row, le, model, feat_cols)
-            st.write(f'According to your profile and preferences, the best industry to work is: `{result}`')
+        st.write('Add the employee and company profiles on the left and press:')
+        if st.button('Predict Salary Costs'):
+            result = get_predict(row, oe, model, feat_cols)
+            st.write(f'According to the inserted profiles, the salary should be around: `{result}`€')
 
     with right_column:
         image = Image.open('images/question-mark.jpg')
