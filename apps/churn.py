@@ -102,7 +102,7 @@ def app():
                     f'According to the employee profile, it is predicted that he/she `wants to stay` in your company.')
 
     with right_column:
-        image = Image.open('images/question-mark.jpg')
+        image = Image.open('images/question-mark.png')
         image = image.resize((125, 125), Image.ANTIALIAS)
         st.image(image)
         st.write('Did you know that ' + get_random_string())

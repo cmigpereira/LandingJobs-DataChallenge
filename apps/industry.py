@@ -83,7 +83,7 @@ def app():
             st.write(f'According to your profile and preferences, the best industry to work in is: `{result}`')
 
     with right_column:
-        image = Image.open('images/question-mark.jpg')
+        image = Image.open('images/question-mark.png')
         image = image.resize((125, 125), Image.ANTIALIAS)
         st.image(image)
         st.write('Did you know that ' + get_random_string())
