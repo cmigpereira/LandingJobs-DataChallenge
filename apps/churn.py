@@ -26,59 +26,80 @@ def get_random_string():
 
 @st.cache
 def load_data():
-    with open('./data/worklife_labelencoder.joblib', 'rb') as fl:
-        le = joblib.load(fl)
-    with open('./data/worklife_model.joblib', 'rb') as fm:
+    with open('./data/company_churn.pkl', 'rb') as fm:
         model = joblib.load(fm)
-    with open('./data/worklife_features.json', 'r', encoding='utf8') as ff:
+    with open('./data/company_churn_variables.json', 'r', encoding='utf8') as ff:
         features = json.load(ff)
 
-    return le, features, model
+    return features, model
 
 
-def get_predict(row, le, model, feat_cols):
+def get_predict(row, model, feat_cols):
     df = pd.DataFrame([row], columns=feat_cols)
-    df['Residence_District'] = df['Residence_District'].astype('category')
-    pred = model.predict(df)
 
-    return le.inverse_transform(pred)[0]
+    df.loc[df['Salary_Change'] == 'Decreased more than 15%', 'Salary_Change_Encoded'] = 0
+    df.loc[df['Salary_Change'] == '[-15%, -5%[', 'Salary_Change_Encoded'] = 1
+    df.loc[df['Salary_Change'] == '[-5%, 0%[', 'Salary_Change_Encoded'] = 2
+    df.loc[df['Salary_Change'] == 'Hasn\'t changed', 'Salary_Change_Encoded'] = 3
+    df.loc[df['Salary_Change'] == ']0%, 5%]', 'Salary_Change_Encoded'] = 4
+    df.loc[df['Salary_Change'] == ']5%,15%]', 'Salary_Change_Encoded'] = 5
+    df.loc[df['Salary_Change'] == 'Increased more than 15%', 'Salary_Change_Encoded'] = 6
+    df = df.drop('Salary_Change', axis=1)
+
+    df = df[['Avg_Salary', 'Salary_Change_Encoded', 'Job_Role',
+             'Residence_District', 'Employer_Industry']]
+
+    df.loc[:, df.dtypes == 'object'] = df.select_dtypes(['object']).apply(lambda x: x.astype('category'))
+
+    probability = model.predict(df)[0]
+    output = 1 if probability >= 0.23 else 0
+
+    lift = round((probability / 0.161), 2)
+
+    return lift, output
 
 
 def app():
-    st.header('Best industry to work in')
+    st.header('Predict churn employee')
 
-    le, features, model = load_data()
+    features, model = load_data()
 
-    st.write("This pages enable companies to .")
+    st.write(
+        "This page allows companies to predict the probability of an employee, given certain profile, churning the company in the next 6 months.")
+    st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
 
     with left_column:
+
+        salary = st.number_input("Salary", 0, 200000, 20000, 500)
+        salary_change = st.selectbox("Salary Change", (sorted(features['Salary_Change'])),
+                                     format_func=lambda x: 'Salary Change' if x == '' else x)
+        job_role = st.selectbox("Job Role", (sorted(features['Job_Role'])),
+                                format_func=lambda x: 'Job Role' if x == '' else x)
         residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
                                           format_func=lambda x: 'Residence District' if x == '' else x)
-        age = st.number_input("Age (Years)", 16, 67, 42, 1)
-        salary_fairness = st.slider("Salary Fairness", 1, 7, 4, 1)
-        training = st.slider("Training/Development programs at work", 1, 7, 4, 1)
-        equipment_allowance = st.slider("Allowance for Computer / Office equip", 1, 7, 4, 1)
-        flexible_schedule = st.slider('Flexible schedule', 1, 7, 4, 1)
-        stock_options = st.slider("Stock options or shares", 1, 7, 4, 1)
+        employer_industry = st.selectbox("Employer Industry", (sorted(features['Employer_Industry'])),
+                                         format_func=lambda x: 'Employer Industry' if x == '' else x)
 
-        row = [residence_district, age, salary_fairness, training, equipment_allowance, flexible_schedule,
-               stock_options]
+        row = [salary, salary_change, job_role, residence_district, employer_industry]
 
-        feat_cols = ['Residence_District',
-                     'Age',
-                     'Salary_Fairness',
-                     'Job_Motivator_Training/Development_programs_at_work',
-                     'Job_Perk_Computer/_Office_equipment_allowance',
-                     'Job_Motivator_Flexible_schedule',
-                     'Job_Perk_Stock_options_or_shares']
+        feat_cols = ['Avg_Salary',
+                     'Salary_Change',
+                     'Job_Role',
+                     'Residence_District',
+                     'Employer_Industry']
 
     with center_column:
-        st.write('Add your profile and preferences on the left and press:')
-        if st.button('Find Best Industry'):
-            result = get_predict(row, le, model, feat_cols)
-            st.write(f'According to your profile and preferences, the best industry to work is: `{result}`')
+        st.write('Add employee profile on the left and press:')
+        if st.button('Predict churn'):
+            lift, output = get_predict(row, model, feat_cols)
+            if output:
+                st.write(
+                    f'According to the employee profile, it is predicted that he/she `wants to leave` your company in the next 6 months. The probability of this happening is `{lift}x higher` than average.')
+            else:
+                st.write(
+                    f'According to the employee profile, it is predicted that he/she `wants to stay` in your company.')
 
     with right_column:
         image = Image.open('images/question-mark.jpg')
