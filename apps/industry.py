@@ -46,14 +46,15 @@ def get_predict(row, le, model, feat_cols):
 
 def app():
     st.header('Best industry to work in')
-
-    le, features, model = load_data()
-
+    
+    st.text("\n")
     st.write("This page recommends best industry to work in depending on the entered profile and preferences.")
-    st.markdown("**")
+    st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
 
+    le, features, model = load_data()
+    
     with left_column:
         residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
                                           format_func=lambda x: 'Residence District' if x == '' else x)

@@ -90,13 +90,13 @@ def get_predict(row, oe, model, feat_cols):
 def app():
     st.header('Salary Costs Prediction as a future Employee')
     
-
-    oe, features, model = load_data()
-
+    st.text("\n")
     st.write("This page helps you predict the costs your company will have with an employee.")
-    st.markdown("**")
+    st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
+
+    oe, features, model = load_data()
 
     with left_column:
         age = st.slider("Age (Years)", 16, 67, 42, 1)

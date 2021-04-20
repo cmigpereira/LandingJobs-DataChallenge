@@ -62,13 +62,13 @@ def get_predict(row, model, feat_cols):
 def app():
     st.header('Predict churn employee')
 
-    features, model = load_data()
-
-    st.write(
-        "This page allows companies to predict the probability of an employee, given certain profile, churning the company in the next 6 months.")
-    st.markdown("**")
+    st.text("\n")
+    st.write("This page allows companies to predict the probability of an employee, given certain profile, churning the company in the next 6 months.")
+    st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
+
+    features, model = load_data()
 
     with left_column:
 
