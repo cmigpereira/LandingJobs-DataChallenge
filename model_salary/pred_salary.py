@@ -39,13 +39,13 @@ def process_user_input(df, oe):
 @st.cache(ttl=10)
 def get_random_string():
     sentences = [
-        '`Lisboa` was the `Residence District` most reported in the 2021 Tech Careers Survey PT?',
-        '`34 years` old was the average `Age` of the workers that answered the 2021 Tech Careers Survey PT?',
-        'workers in the `Security` industry reported the largest average value for `Salary Fairness` in the 2021 Tech Careers Survey PT?',
-        'workers in the `Nonprofit` industry reported the largest average value for `Training/Development programs at work` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Real estate` industry reported the largest average value reported for `Computer/Office equipment allowance` as job perk in the 2021 Tech Careers Survey PT?',
-        'workers in the `Data and analytics` industry reported the largest average value reported for `Flexible schedule` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Security` industry reported the largest average value reported for `Stock options or shares` as job perk in the 2021 Tech Careers Survey PT?']
+        '`Mobile Apps Developer` role has, on average, a `higher salary` than other developer roles? Contrarily, `Computer & Network Security` roles earn the less.',
+        '`Contractors` earn, on average, `55% more` than Permanent Employees?', 
+        'people in `Lisbon`, on average, earn `2x more` than their counterparts in `Vila Real`? Interestingly enough, people in `Beja` earn almost the same as people in `Lisbon`.', 
+        'people in the `Nonprofit` and in the `Research` industry gets the lower wages? Their salary is about 60% less than their counterparts in other industries.',
+        '`Scale-ups` offer the best salaries? About 50% more than other types of organizations!', 
+        'people being paid under 30k gross a year always think they are paid unfairly?', 
+        '`Females` are `underpaid` in about 18% when comparing to their `Male` counterparts?']
     return random.choice(sentences)
 
 
