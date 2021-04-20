@@ -89,11 +89,12 @@ def get_predict(row, oe, model, feat_cols):
 
 def app():
     st.header('Salary Costs Prediction as a future Employee')
+    
 
     oe, features, model = load_data()
 
-    st.write("This page helps you predict the costs you'll engage with an employee.")
-    st.markdown("***")
+    st.write("This page helps you predict the costs your company will have with an employee.")
+    st.markdown("**")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
 
@@ -131,6 +132,6 @@ def app():
 
     with right_column:
         image = Image.open('images/question-mark.jpg')
-        image = image.resize((150, 150), Image.ANTIALIAS)
+        image = image.resize((125, 125), Image.ANTIALIAS)
         st.image(image)
         st.write('Did you know that ' + get_random_string())

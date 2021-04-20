@@ -49,8 +49,8 @@ def app():
 
     le, features, model = load_data()
 
-    st.write("This page recommends best industries to work in depending on the entered profile and preferences.")
-    st.markdown("***")
+    st.write("This page recommends best industry to work in depending on the entered profile and preferences.")
+    st.markdown("**")
 
     left_column, center_column, right_column = st.beta_columns((1, 1, 1))
 
@@ -83,6 +83,6 @@ def app():
 
     with right_column:
         image = Image.open('images/question-mark.jpg')
-        image = image.resize((150, 150), Image.ANTIALIAS)
+        image = image.resize((125, 125), Image.ANTIALIAS)
         st.image(image)
         st.write('Did you know that ' + get_random_string())
