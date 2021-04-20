@@ -44,7 +44,7 @@ def get_random_string():
         'people in `Lisbon`, on average, earn `2x more` than their counterparts in `Vila Real`? Interestingly enough, people in `Beja` earn almost the same as people in `Lisbon`.', 
         'people in the `Nonprofit` and in the `Research` industry gets the lower wages? Their salary is about 60% less than their counterparts in other industries.',
         '`Scale-ups` offer the best salaries? About 50% more than other types of organizations!', 
-        'people being paid under 30k gross a year always think they are paid unfairly?', 
+        'people being paid under `30K` gross a year always think they are paid unfairly?', 
         '`Females` are `underpaid` in about 18% when comparing to their `Male` counterparts?']
     return random.choice(sentences)
 
