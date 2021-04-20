@@ -56,6 +56,8 @@ def app():
     le, features, model = load_data()
     
     with left_column:
+        st.write('Add your profile and preferences and press the button at the end')
+        
         residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
                                           format_func=lambda x: 'Residence District' if x == '' else x)
         age = st.slider("Age (Years)", 16, 67, 42, 1)
@@ -76,7 +78,6 @@ def app():
                      'Job_Motivator_Flexible_schedule',
                      'Job_Perk_Stock_options_or_shares']
 
-        st.write('Add your profile and preferences on the left and press:')
         if st.button('Find Best Industry'):
             result = get_predict(row, le, model, feat_cols)
             st.write(f'According to your profile and preferences, the best industry to work in is: `{result}`')

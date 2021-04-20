@@ -84,6 +84,8 @@ def app():
     oe, features, model = load_data()
 
     with left_column:
+        st.write('Add your profile and press the button at the end')
+        
         age = st.slider("Age (Years)", 16, 67, 42, 1)
         job_role = st.selectbox("Job Role", (sorted(features['Job_Role'])),
                                 format_func=lambda x: 'Job Role' if x == '' else x)
@@ -109,7 +111,6 @@ def app():
                      'Work_Company_Country',
                      'Work_Company_PT_District']
 
-        st.write('Add your profile and preferences on the left and press:')
         if st.button('Find Predicted Salary'):
             result = get_predict(row, oe, model, feat_cols)
             st.write(f'According to the inserted profile, the salary should be around: `{result}€`')

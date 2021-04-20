@@ -71,7 +71,8 @@ def app():
     features, model = load_data()
 
     with left_column:
-
+        st.write('Add the employee profile and press the button at the end')
+        
         salary = st.number_input("Salary", 0, 200000, 20000, 500)
         salary_change = st.selectbox("Salary Change", (sorted(features['Salary_Change'])),
                                      format_func=lambda x: 'Salary Change' if x == '' else x)
@@ -90,7 +91,6 @@ def app():
                      'Residence_District',
                      'Employer_Industry']
 
-        st.write('Add employee profile on the left and press:')
         if st.button('Predict churn'):
             lift, output = get_predict(row, model, feat_cols)
             if output:
