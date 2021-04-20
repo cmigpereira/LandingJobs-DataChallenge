@@ -91,7 +91,7 @@ def app():
                      'Residence_District',
                      'Employer_Industry']
 
-        if st.button('Predict churn'):
+        if st.button('Predict Churn'):
             lift, output = get_predict(row, model, feat_cols)
             if output:
                 st.write(
