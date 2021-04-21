@@ -15,9 +15,9 @@ And, above all, we implemented them with a user interface to allow you to play w
 
 You can learn more about each model in the respective *Readme.md* inside each model's folder.
 
-## Run locally the app
+## Run the app locally
 
-In order to run locally the app, you just need to install the required packages listed in *requirements.txt* and run:
+In order to run the app locally, you just need to install the required packages listed in *requirements.txt* and run:
 ```
 streamlit run streamlit_app.py
 ```

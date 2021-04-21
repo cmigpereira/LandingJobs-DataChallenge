@@ -5,15 +5,15 @@ Moreover, an unusually high churn rate indicates problems within the company, su
 
 #### Problem
 Until now, companies have been forecasting how many employees might leave by calculating the churn rate each time. 
-Consequently, companies know, in average, how many people might leave the company, but they do not know who will leave. 
+Consequently, companies know, on average, how many people might leave the company, but they do not know who will leave. 
 If they can anticipate who will leave, they might avoid it or, at least, be prepared for it.
 
 In this model, we devised a Machine Learning approach based on a LightGBM algorithm.
 We predict an employee leaving the company in the next six months using the variables considered most relevant for the prediction:
 - Salary: What is the employee gross annual income in €? Keep in mind that this may include commission, bonuses, etc.
-- Salary Change in last year: How much did the employee income change in the last 12 months? Remember how important wage increases are in the world of employment...
+- Salary Change in last year: How much did the employee income change in the previous 12 months? Remember how significant wage increases are in the world of employment!
 - Job Role: Depending on the job role, the salaries increase or decrease. Usually related to demand and the industry where this role is needed more! :)
-- Employee Residence District: The district of residence is often the district of work. Therefore, it is mainly related to the cost of living in certain districts, but, with competition between companies, salaries vary.
+- Employee Residence District: The district of residence is often the district of work. Therefore, it is mainly related to the cost of living in certain districts, but salaries vary with competition between companies.
 - Employer Industry: Whether you like it or not, although having the same job role, different industries pay different salaries.
 
 #### Performance
