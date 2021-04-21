@@ -17,10 +17,11 @@ You can learn more about each model in the respective *Readme.md* inside each mo
 
 ## Run the app locally
 
-In order to run the app locally, you just need to install the required packages listed in *requirements.txt* and run:
+If you prefer to run the app locally, you just need to install the required packages listed in *requirements.txt* and run:
 ```
 streamlit run streamlit_app.py
 ```
+Nevertheless, you can run the app online [here](https://share.streamlit.io/cmigpereira/landingjobs-datachallenge/main).
 
 ## Have fun but be socially responsible!
 
