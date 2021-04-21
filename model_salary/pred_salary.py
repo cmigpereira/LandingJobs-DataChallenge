@@ -91,14 +91,14 @@ def app():
                                 format_func=lambda x: 'Job Role' if x == '' else x)
         employer_industry = st.selectbox("Employer Industry", (sorted(features['Employer_Industry'])),
                                          format_func=lambda x: 'Employer Industry' if x == '' else x)
-        working_experience = st.selectbox("Working Experience", (sorted(features['Working_Experience'])),
+        working_experience = st.selectbox("Employee Working Experience", (sorted(features['Working_Experience'])),
                                           format_func=lambda x: 'Working Experience' if x == '' else x)
         employer_org_type = st.selectbox("Employer Org Type", (sorted(features['Employer_Org_Type'])),
                                          format_func=lambda x: 'Employer Org Type' if x == '' else x)
-        work_company_country = st.selectbox("Work Company Country", (sorted(features['Work_Company_Country'])),
-                                            format_func=lambda x: 'Work Company Country' if x == '' else x)
-        work_company_pt_district = st.selectbox("Work Company District", (sorted(features['Work_Company_PT_District'])),
-                                                format_func=lambda x: 'Work Company District' if x == '' else x)
+        work_company_country = st.selectbox("Employer Original Country", (sorted(features['Work_Company_Country'])),
+                                            format_func=lambda x: 'Employer Original Country' if x == '' else x)
+        work_company_pt_district = st.selectbox("Employer Portugal District", (sorted(features['Work_Company_PT_District'])),
+                                                format_func=lambda x: 'Employer Portugal District' if x == '' else x)
 
         row = [age, job_role, employer_industry, working_experience,
                employer_org_type, work_company_country, work_company_pt_district]

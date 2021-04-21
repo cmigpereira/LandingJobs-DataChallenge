@@ -2,17 +2,30 @@ import streamlit as st
 
 
 def app():
-    st.header('Shedding light on the Portugal tech market with People Analytics')
-   # st.markdown("<h1 style='text-align: center; color: red;'>Shedding light on the Portugal tech market with People Analytics</h1>", unsafe_allow_html=True)
-
+    
+    #Title rendering
+    Title_html = """
+    <style>
+        .title h1{
+          user-select: none;
+          text-align: center;
+          font-size: 36px;
+          background: black;
+          -webkit-background-clip: text;
+        }
+    </style> 
+    
+    <div class="title">
+        <h1>Shedding light on Portugal Tech market with People Analytics</h1>
+    </div>
+    """
+    st.markdown(Title_html, unsafe_allow_html=True)
     st.markdown("***")
     
-
-
-    st.write('This app aims helping both companies and employees to make better, data-driven decisions with respect to people management.')
+    st.markdown('*Jobs Wizard* aims helping both companies and employees to make better, data-driven decisions with respect to people management.')
     st.write('Leveraging data from the Tech Careers Report Portugal 2021, provided by Landing.Jobs, we devised 4 Machine Learning models (yes, that\'s right, 4 models!) to tackle 4 main challenges in the People Analytics area.')
     st.write('And, above all, we implemented them with a user interface to allow you to play with them.')
-    st.write('They are:')
+    st.write('They models are:')
     st.markdown(
         """    
         - *Predict Churn*: predict whether an employee is about to leave (churn) the company or not;

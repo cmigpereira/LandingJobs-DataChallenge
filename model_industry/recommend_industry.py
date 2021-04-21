@@ -48,7 +48,7 @@ def app():
     st.header('Recommend Industry')
     
     st.text("\n")
-    st.write("This page recommends to employees the best industry to work in depending on profile and preferences")
+    st.write("This page recommends the best industry to work in depending on profile and preferences")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
@@ -61,11 +61,11 @@ def app():
         residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
                                           format_func=lambda x: 'Residence District' if x == '' else x)
         age = st.slider("Age (Years)", 16, 67, 42, 1)
-        salary_fairness = st.slider("Salary Fairness", 1, 7, 4, 1)
-        training = st.slider("Training/Development programs at work", 1, 7, 4, 1)
-        equipment_allowance = st.slider("Allowance for Computer / Office equip", 1, 7, 4, 1)
-        flexible_schedule = st.slider('Flexible schedule', 1, 7, 4, 1)
-        stock_options = st.slider("Stock options or shares", 1, 7, 4, 1)
+        salary_fairness = st.slider("How important is Salary Fairness", 1, 7, 4, 1)
+        training = st.slider("How important are Training/Development programs at work", 1, 7, 4, 1)
+        equipment_allowance = st.slider("How important is Allowance for Computer / Office equip", 1, 7, 4, 1)
+        flexible_schedule = st.slider('How important is Flexible schedule', 1, 7, 4, 1)
+        stock_options = st.slider("How important are Stock options or shares", 1, 7, 4, 1)
 
         row = [residence_district, age, salary_fairness, training, equipment_allowance, flexible_schedule,
                stock_options]

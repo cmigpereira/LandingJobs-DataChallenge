@@ -6,10 +6,21 @@ from model_costs import pred_costs
 from model_salary import pred_salary
 from model_industry import recommend_industry
 import about
-
+from PIL import Image 
 app = MultiApp()
 
-st.set_page_config(page_title="People Analytics @ Team Vectorize", layout='centered')
+#load icon
+favicon = Image.open('images/favicon.ico')
+st.set_page_config(page_title="Jobs Wizard", page_icon = favicon, layout='centered')
+
+# hide button
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 #Apps
 app.add_app("Home", home.app)
