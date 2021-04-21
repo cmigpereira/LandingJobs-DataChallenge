@@ -6,7 +6,7 @@ def app():
     st.header('About the models')
     st.markdown("***")
     
-    st.subheader('Predict Churn model')
+    st.subheader('Predict Churn')
 
     st.markdown("""
     #### Goal
@@ -36,7 +36,7 @@ def app():
     It is also curious that this has even more importance than the value of the salary itself.""")
     st.markdown("***")
 
-    st.subheader('Predict Costs model')
+    st.subheader('Predict Costs')
     st.markdown("""
     #### Goal
     The goal of this model is to predict the costs a company will have with the given candidate profile, over a selected period of years. 
@@ -65,7 +65,7 @@ def app():
     
     st.markdown("***")
 
-    st.subheader('Predict Salary model')
+    st.subheader('Predict Salary')
     st.markdown("""
     #### Goal
     The goal of this model is to predict the salary of an employee with the given profile.
@@ -94,7 +94,7 @@ def app():
 
     st.markdown("***")
 
-    st.subheader('Recommend Industry model')
+    st.subheader('Recommend Industry')
     st.markdown("""
     #### Goal
     The goal of this model is to predict the best industry for a person to work taking into consideration its own preferences. 

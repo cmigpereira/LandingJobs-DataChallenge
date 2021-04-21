@@ -145,7 +145,7 @@ def app():
         work_company_country = st.selectbox("Employer Original Country", (sorted(features['Work_Company_Country'])),
                                             format_func=lambda x: 'Employer Original Country' if x == '' else x)
         years_long = st.slider("Years of Costs Calculation", 1, 5, 3, 1)
-
+        
         row = [age, job_role, employer_industry, working_experience,
                employer_size, employer_org_type, work_company_country]
 
