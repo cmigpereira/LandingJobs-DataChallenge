@@ -15,6 +15,13 @@ And, above all, we implemented them with a user interface to allow you to play w
 
 You can learn more about each model in the respective *Readme.md* inside each model's folder.
 
+## Running the app
+
+In order to run the app, you just need to install *streamlit* and run
+```
+streamlit run streamlit_app.py
+```
+
 ## Have fun but be socially responsible!
 
 Please remember that any Machine Learning model can fail and their performance is tightly related with the data, both in data quality and data size used for training the models.
