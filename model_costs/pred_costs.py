@@ -54,13 +54,13 @@ def process_user_input(df, oe):
 @st.cache(ttl=10)
 def get_random_string():
     sentences = [
-        '`Lisboa` was the `Residence District` most reported in the 2021 Tech Careers Survey PT?',
-        '`34 years` old was the average `Age` of the workers that answered the 2021 Tech Careers Survey PT?',
-        'workers in the `Security` industry reported the largest average value for `Salary Fairness` in the 2021 Tech Careers Survey PT?',
-        'workers in the `Nonprofit` industry reported the largest average value for `Training/Development programs at work` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Real estate` industry reported the largest average value reported for `Computer/Office equipment allowance` as job perk in the 2021 Tech Careers Survey PT?',
-        'workers in the `Data and analytics` industry reported the largest average value reported for `Flexible schedule` as job motivator in the 2021 Tech Careers Survey PT?',
-        'workers in the `Security` industry reported the largest average value reported for `Stock options or shares` as job perk in the 2021 Tech Careers Survey PT?']
+        '`Mobile Apps Developer` role has, on average, a `higher salary` than other developer roles? Contrarily, `Computer & Network Security` roles earn the less.',
+        '`Contractors` earn, on average, `55% more` than Permanent Employees?', 
+        'people in `Lisbon`, on average, earn `2x more` than their counterparts in `Vila Real`? Interestingly enough, people in `Beja` earn almost the same as people in `Lisbon`.', 
+        'people who get into the tech industry through `Code Bootcamps` earn, on average, `30% less` than those who have a degree?',
+        '`Scale-ups` offer the best salaries? About 50% more than other types of organizations!', 
+        'people being paid `under 30k` gross a year always think they are paid `unfairly`?', 
+        'people who do not care about work-life balance have, on average, a 50% higher salary?']
     return random.choice(sentences)
 
 
@@ -84,8 +84,39 @@ def get_predict(row, oe, model, feat_cols):
 
     pred = model.predict(df)
 
-    return round(int(pred[0]), -2)
+    return pred[0]
 
+def get_predict_years(row, oe, model, feat_cols, years_long):
+    # same working experience
+    if ((years_long == 1) | (years_long == 2)):
+        original_row = row
+        years_added = 0
+        result = 0
+        while years_added < years_long:
+            row[0] = row[0] + years_added
+            result += get_predict(row, oe, model, feat_cols) * 1.23
+            row = original_row
+            years_added = years_added + 1
+    # changes working experience
+    else:
+        # first two years
+        original_row = row
+        years_added = 0
+        result = 0
+        while years_added < 2:
+            row[0] = row[0] + years_added
+            result += get_predict(row, oe, model, feat_cols) * 1.23
+            row = original_row
+            years_added = years_added + 1
+        # the rest of the years
+        while years_added < 2:
+            row[0] = row[0] + years_added
+            row[3] = row[3] + 1
+            result += get_predict(row, oe, model, feat_cols) * 1.23
+            row = original_row
+            years_added = years_added + 1
+
+    return round(result, -2)
 
 def app():
     st.header('Salary Costs Prediction with a future Employee')
@@ -114,7 +145,7 @@ def app():
                                          format_func=lambda x: 'Employer Org Type' if x == '' else x)
         work_company_country = st.selectbox("Work Company Country", (sorted(features['Work_Company_Country'])),
                                             format_func=lambda x: 'Work Company Country' if x == '' else x)
-       years_long = st.slider("Years of Costs Calculation", 1, 5, 2, 1)
+        years_long = st.slider("Years of Costs Calculation", 1, 5, 3, 1)
 
         row = [age, job_role, employer_industry, working_experience,
                employer_size, employer_org_type, work_company_country]
@@ -128,34 +159,7 @@ def app():
                      'Work_Company_Country']
 
         if st.button('Predict Costs'):
-            result = get_predict(row, oe, model, feat_cols)
-            # doesnt change working_experience
-            if ((years_long == 1) | (years_long == 2)):
-                     original_row = row
-                     years_added = 0
-                     result = 0
-                     for (years_added < years_long):
-                     row[0] = row[0] + years_added
-                     result += get_predict(row, oe, model, feat_cols) * 1.23
-                     row = original_row
-            # changes working experience
-            else:
-                     # first two years
-                     original_row = row
-                     years_added = 0
-                     result = 0
-                     for (years_added < 2):
-                            row[0] = row[0] + years_added
-                            result += get_predict(row, oe, model, feat_cols) * 1.23
-                            row = original_row
-                            years_added = years_added + 1
-                # the rest of the years
-                     for (years_added < 2):
-                            row[0] = row[0] + years_added
-                            row[3] = row[3] + 1
-                            result += get_predict(row, oe, model, feat_cols) * 1.23
-                            row = original_row
-                            years_added = years_added + 1
+            result = get_predict_years(row, oe, model, feat_cols, years_long)
             st.write(f'According to the inserted profiles, the salary should be around: `{result}`€')
 
         st.markdown("***")
