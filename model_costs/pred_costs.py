@@ -90,8 +90,6 @@ def get_predict(row, oe, model, feat_cols, age_increase, experience_increase):
 
 
 def get_predict_years(row, oe, model, feat_cols, years_long):
-    #row = [age, job_role, employer_industry, working_experience,
-    #               employer_size, employer_org_type, work_company_country]
 
     # doesnt change working_experience
     if ((years_long == 1) | (years_long == 2)):
@@ -99,14 +97,9 @@ def get_predict_years(row, oe, model, feat_cols, years_long):
         years_added = 0
         result = 0
         while (years_added < years_long):
-            print("Original row:", original_row)
-            print("Years added:", years_added, "<", years_long, "(years long).")
-            print("Current row:", row)
             result += get_predict(row, oe, model, feat_cols, years_added, 0) * 1.23
             row = original_row.copy()
             years_added = years_added + 1
-            print("Result:", result)
-            print("$")
     # changes working experience
     else:
         # first two years
@@ -114,27 +107,14 @@ def get_predict_years(row, oe, model, feat_cols, years_long):
         years_added = 0
         result = 0
         while (years_added < 2):
-            print("Original row:", original_row)
-            print("Years added:", years_added, "<", years_long, "(years long).")
-            print("Current row:", row)
             result += get_predict(row, oe, model, feat_cols, years_added, 0) * 1.23
             row = original_row.copy()
             years_added = years_added + 1
-            print("Result:", result)
-            print("$")
         # the rest of the years
         while (years_added < years_long):
-            print("Original row:", original_row)
-            print("Years added:", years_added, "<", years_long, "(years long).")
-            print("Current row:", row)
             result += get_predict(row, oe, model, feat_cols, years_added, 1) * 1.23
             row = original_row.copy()
             years_added = years_added + 1
-            print("Result:", result)
-            print("$")
-
-    print("Final result:", result)
-    print("Rounded result:", round(result, -2))
 
     return round(result, -2)
 
