@@ -1,6 +1,6 @@
 # Jobs Wizard
 
-[Jobs Wizard](https://www.jobswizard.tech/) aims to help both companies and employees to make better, data-driven decisions with respect to people management.
+[Jobs Wizard](https://share.streamlit.io/cmigpereira/landingjobs-datachallenge/main) aims to help both companies and employees to make better, data-driven decisions with respect to people management.
 
 Leveraging data from the Tech Careers Report Portugal 2021, provided by Landing.Jobs, we devised 4 Machine Learning models (yes, that's right, 4 models!) to tackle 4 main challenges in the People Analytics area.
 
