@@ -7,6 +7,7 @@ import joblib
 import json
 from sklearn.preprocessing import LabelEncoder
 import warnings
+from collections import OrderedDict
 
 warnings.filterwarnings('ignore')
 
@@ -29,7 +30,7 @@ def load_data():
     with open('./model_churn/data/company_churn_model.pkl', 'rb') as fm:
         model = joblib.load(fm)
     with open('./model_churn/data/company_churn_variables.json', 'r', encoding='utf8') as ff:
-        features = json.load(ff)
+        features = json.load(ff,  object_pairs_hook=OrderedDict)
 
     return features, model
 
