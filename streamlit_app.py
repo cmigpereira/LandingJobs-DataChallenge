@@ -9,7 +9,7 @@ import about
 
 app = MultiApp()
 
-st.set_page_config(page_title="People Analytics @ Team Vectorize", layout='wide')
+st.set_page_config(page_title="People Analytics @ Team Vectorize", layout='centered')
 
 #Apps
 app.add_app("Home", home.app)

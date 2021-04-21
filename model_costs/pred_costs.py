@@ -121,7 +121,7 @@ def app():
     st.header('Predict Costs')
     
     st.text("\n")
-    st.write("This page helps to predict the costs a company will have with a future employee over the years taking into consideration the profile and areas.")
+    st.write("This page helps to predict the costs a company will have with a future employee over the years taking into consideration the profile")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))

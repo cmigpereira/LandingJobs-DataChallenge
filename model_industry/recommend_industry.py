@@ -48,7 +48,7 @@ def app():
     st.header('Recommend Industry')
     
     st.text("\n")
-    st.write("This page recommends to employees the best industry to work in depending on the profile and preferences.")
+    st.write("This page recommends to employees the best industry to work in depending on profile and preferences")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))

@@ -63,7 +63,7 @@ def app():
     st.header('Predict Churn')
 
     st.text("\n")
-    st.write("This page allows to predict whether an employee will leave (churn) a company in the next 6 months or not taking into consideration its profile.")
+    st.write("This page allows to predict whether an employee will leave (churn) a company in the next 6 months or not taking into consideration the profile")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
