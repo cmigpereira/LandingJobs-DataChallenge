@@ -25,7 +25,7 @@ def app():
     st.markdown('*Jobs Wizard* aims helping both companies and employees to make better, data-driven decisions with respect to people management.')
     st.write('Leveraging data from the Tech Careers Report Portugal 2021, provided by Landing.Jobs, we devised 4 Machine Learning models (yes, that\'s right, 4 models!) to tackle 4 main challenges in the People Analytics area.')
     st.write('And, above all, we implemented them with a user interface to allow you to play with them.')
-    st.write('They models are:')
+    st.write('The models are:')
     st.markdown(
         """    
         - *Predict Churn*: predict whether an employee is about to leave (churn) the company or not;
