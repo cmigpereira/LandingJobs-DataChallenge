@@ -114,6 +114,7 @@ def app():
                                          format_func=lambda x: 'Employer Org Type' if x == '' else x)
         work_company_country = st.selectbox("Work Company Country", (sorted(features['Work_Company_Country'])),
                                             format_func=lambda x: 'Work Company Country' if x == '' else x)
+       years_long = st.slider("Years of Costs Calculation", 1, 5, 2, 1)
 
         row = [age, job_role, employer_industry, working_experience,
                employer_size, employer_org_type, work_company_country]
@@ -128,6 +129,33 @@ def app():
 
         if st.button('Predict Costs'):
             result = get_predict(row, oe, model, feat_cols)
+            # doesnt change working_experience
+            if ((years_long == 1) | (years_long == 2)):
+                     original_row = row
+                     years_added = 0
+                     result = 0
+                     for (years_added < years_long):
+                     row[0] = row[0] + years_added
+                     result += get_predict(row, oe, model, feat_cols) * 1.23
+                     row = original_row
+            # changes working experience
+            else:
+                     # first two years
+                     original_row = row
+                     years_added = 0
+                     result = 0
+                     for (years_added < 2):
+                            row[0] = row[0] + years_added
+                            result += get_predict(row, oe, model, feat_cols) * 1.23
+                            row = original_row
+                            years_added = years_added + 1
+                # the rest of the years
+                     for (years_added < 2):
+                            row[0] = row[0] + years_added
+                            row[3] = row[3] + 1
+                            result += get_predict(row, oe, model, feat_cols) * 1.23
+                            row = original_row
+                            years_added = years_added + 1
             st.write(f'According to the inserted profiles, the salary should be around: `{result}`€')
 
         st.markdown("***")
