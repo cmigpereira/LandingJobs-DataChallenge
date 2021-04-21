@@ -20,7 +20,7 @@ def app():
     
     In this model, we devised a Machine Learning approach based on a LightGBM algorithm.
     We predict an employee leaving the company in the next six months using the variables considered most relevant for the prediction:
-    - Salary: What is the employee gross annual income in euros? Keep in mind that this may include commission, bonuses, etc.
+    - Salary: What is the employee gross annual income in €? Keep in mind that this may include commission, bonuses, etc.
     - Salary Change in last year: How much did the employee income change in the last 12 months? Remember how important wage increases are in the world of employment...
     - Job Role: Depending on the job role, the salaries increase or decrease. Usually related to demand and the industry where this role is needed more! :)
     - Employee Residence District: The district of residence is often the district of work. Therefore, it is mainly related to the cost of living in certain districts, but, with competition between companies, salaries vary.
@@ -33,7 +33,8 @@ def app():
     
     #### Interesting Observations
     We noticed that negative wage changes lead to people's dissatisfaction and a propensity to churn. 
-    It is also curious that this has even more importance than the value of the salary itself.""")
+    It is also curious that this has even more importance than the value of the salary itself.
+    """)
     st.markdown("***")
 
     st.subheader('Predict Costs')
@@ -61,7 +62,8 @@ def app():
 
     #### Interesting Observations
     We noticed that lower experience workers usually get salary costs predictions below the expected. 
-    This is probably related with the fact that, with time and experience, the salary increase is not linear.""")
+    This is probably related with the fact that, with time and experience, the salary increase is not linear.
+    """)
     
     st.markdown("***")
 
@@ -90,7 +92,8 @@ def app():
     #### Interesting Observations
     We noticed that lower experience workers usually get salary predictions below the deserved. 
     This is probably related with the fact that, with time and experience, the salary increase is not linear. 
-    Cool! (but we would love it to be linear, don't we?)""")
+    Cool! (but we would love it to be linear, don't we?)
+    """)
 
     st.markdown("***")
 
@@ -120,6 +123,7 @@ def app():
     Therefore, we chose the most important variables for the calculation, which allowed us to leverage a micro-average multiclass AUROC metric of 0.6.
 
     #### Interesting 
-    We noticed that Residence District is the most important indicator to recommend the industry to work in. Will this change if companies become more remote-working friendly?
+    We noticed that Residence District is the most important indicator to recommend the industry to work in. 
+    Will this change if companies become more remote-working friendly?
     """)
     st.markdown("***")
