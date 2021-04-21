@@ -45,10 +45,10 @@ def get_predict(row, le, model, feat_cols):
 
 
 def app():
-    st.header('Best industry to work in')
+    st.header('Recommend Industry')
     
     st.text("\n")
-    st.write("This page recommends best industry to work in depending on the entered profile and preferences.")
+    st.write("This page recommends employees the best industry to work in depending on the profile and preferences.")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
@@ -56,7 +56,7 @@ def app():
     le, features, model = load_data()
     
     with left_column:
-        st.write('Add your profile and preferences and press the button at the end')
+        st.write('Add the profile and preferences and press the button at the end')
         
         residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
                                           format_func=lambda x: 'Residence District' if x == '' else x)
@@ -78,6 +78,7 @@ def app():
                      'Job_Motivator_Flexible_schedule',
                      'Job_Perk_Stock_options_or_shares']
 
+        st.text("\n")
         if st.button('Recommend Industry'):
             result = get_predict(row, le, model, feat_cols)
             st.write(f'According to your profile and preferences, the best industry to work in is: `{result}`')

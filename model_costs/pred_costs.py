@@ -90,7 +90,6 @@ def get_predict(row, oe, model, feat_cols, age_increase, experience_increase):
 
 
 def get_predict_years(row, oe, model, feat_cols, years_long):
-
     # doesnt change working_experience
     if ((years_long == 1) | (years_long == 2)):
         original_row = row.copy()
@@ -116,13 +115,13 @@ def get_predict_years(row, oe, model, feat_cols, years_long):
             row = original_row.copy()
             years_added = years_added + 1
 
-    return round(result, -2)
+    return int(round(result, -2))
 
 def app():
-    st.header('Salary Costs Prediction with a future Employee')
+    st.header('Predict Costs')
     
     st.text("\n")
-    st.write("This page helps you predict the costs your company will have with an employee.")
+    st.write("This page helps companies to predict the costs your company will have with a future employee over the years taking into consideration the profile and areas.")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
@@ -130,7 +129,7 @@ def app():
     oe, features, model = load_data()
 
     with left_column:
-        st.write('Add the employee profile and press the button at the end')
+        st.write('Add the employee profile along with the years of salary to predict and press the button at the end')
         
         age = st.slider("Age (Years)", 16, 67, 42, 1)
         job_role = st.selectbox("Job Role", (sorted(features['Job_Role'])),
@@ -158,6 +157,7 @@ def app():
                      'Employer_Org_Type',
                      'Work_Company_Country']
 
+        st.text("\n")
         if st.button('Predict Costs'):
             result = get_predict_years(row, oe, model, feat_cols, years_long)
             st.write(f'According to the inserted profiles, the salary should be around: `{result}`€')

@@ -69,14 +69,14 @@ def get_predict(row, oe, model, feat_cols):
 
     pred = model.predict(df)
 
-    return round(int(pred[0]), -2)
+    return int(round(pred[0], -2))
 
 
 def app():
-    st.header('Salary Prediction as an Employee')
+    st.header('Predict Salary')
     
     st.text("\n")
-    st.write("This page suggests a salary according to the inserted profile.")
+    st.write("This page predicts the salary a given employee would have today according to the inserted profile.")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
@@ -84,7 +84,7 @@ def app():
     oe, features, model = load_data()
 
     with left_column:
-        st.write('Add your profile and press the button at the end')
+        st.write('Add the profile here and press the button at the end')
         
         age = st.slider("Age (Years)", 16, 67, 42, 1)
         job_role = st.selectbox("Job Role", (sorted(features['Job_Role'])),
@@ -111,6 +111,7 @@ def app():
                      'Work_Company_Country',
                      'Work_Company_PT_District']
 
+        st.text("\n")
         if st.button('Predict Salary'):
             result = get_predict(row, oe, model, feat_cols)
             st.write(f'According to the inserted profile, the salary should be around: `{result}€`')
