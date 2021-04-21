@@ -76,7 +76,7 @@ def app():
     st.header('Predict Salary')
     
     st.text("\n")
-    st.write("This page predicts the salary a given employee would have today according to the inserted profile.")
+    st.write("This page predicts the salary a given employee should be earning today according to the inserted profile.")
     st.markdown("***")
 
     left_column, center_column, right_column = st.beta_columns((1, 0.25, 0.5))
