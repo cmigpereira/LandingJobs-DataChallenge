@@ -17,7 +17,7 @@ However, we cannot just sit here without having a bit of fun, so we implemented 
 #### Performance
 We could increase the number of variables and increase the performance of this model, but we chose to keep it simple for you. 
 The impact of having this low number of variables is not that big, and we ended up with a MAE (mean absolute error) of 9500. 
-This essentially means that the predicted salary, when we evaluated the model, was wrong (in terms of what you really deserve, according to the market) in about 9500€.
+This essentially means that the predicted salary, when we evaluated the model, was wrong (in terms of what you really deserved, according to the market) in about 9500€.
 
 #### Interesting Observations
 We noticed that lower experience workers usually get salary predictions below the deserved. 
