@@ -24,8 +24,8 @@ class MultiApp:
 
     def run(self):
         
-        image = Image.open('images/jobswizard.png')
-        image = image.resize((125, 30), Image.ANTIALIAS)
+        image = Image.open('images/jobswizard-transp.png')
+        image = image.resize((250, 60), Image.ANTIALIAS)
         st.image(image)
         st.sidebar.write("")
 
