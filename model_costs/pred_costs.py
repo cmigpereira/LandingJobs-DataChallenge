@@ -77,44 +77,64 @@ def load_data():
     return oe, features, model
 
 
-def get_predict(row, oe, model, feat_cols):
+def get_predict(row, oe, model, feat_cols, age_increase, experience_increase):
     df = pd.DataFrame([row], columns=feat_cols)
     df = process_user_input(df, oe)
+    df["Age"] = df["Age"] + age_increase
+    df["Working_Experience"] = df["Working_Experience"] + experience_increase
     df = xgb.DMatrix(df.values)
 
     pred = model.predict(df)
 
     return pred[0]
 
+
 def get_predict_years(row, oe, model, feat_cols, years_long):
-    # same working experience
+    #row = [age, job_role, employer_industry, working_experience,
+    #               employer_size, employer_org_type, work_company_country]
+
+    # doesnt change working_experience
     if ((years_long == 1) | (years_long == 2)):
-        original_row = row
+        original_row = row.copy()
         years_added = 0
         result = 0
-        while years_added < years_long:
-            row[0] = row[0] + years_added
-            result += get_predict(row, oe, model, feat_cols) * 1.23
-            row = original_row
+        while (years_added < years_long):
+            print("Original row:", original_row)
+            print("Years added:", years_added, "<", years_long, "(years long).")
+            print("Current row:", row)
+            result += get_predict(row, oe, model, feat_cols, years_added, 0) * 1.23
+            row = original_row.copy()
             years_added = years_added + 1
+            print("Result:", result)
+            print("$")
     # changes working experience
     else:
         # first two years
-        original_row = row
+        original_row = row.copy()
         years_added = 0
         result = 0
-        while years_added < 2:
-            row[0] = row[0] + years_added
-            result += get_predict(row, oe, model, feat_cols) * 1.23
-            row = original_row
+        while (years_added < 2):
+            print("Original row:", original_row)
+            print("Years added:", years_added, "<", years_long, "(years long).")
+            print("Current row:", row)
+            result += get_predict(row, oe, model, feat_cols, years_added, 0) * 1.23
+            row = original_row.copy()
             years_added = years_added + 1
+            print("Result:", result)
+            print("$")
         # the rest of the years
-        while years_added < 2:
-            row[0] = row[0] + years_added
-            row[3] = row[3] + 1
-            result += get_predict(row, oe, model, feat_cols) * 1.23
-            row = original_row
+        while (years_added < years_long):
+            print("Original row:", original_row)
+            print("Years added:", years_added, "<", years_long, "(years long).")
+            print("Current row:", row)
+            result += get_predict(row, oe, model, feat_cols, years_added, 1) * 1.23
+            row = original_row.copy()
             years_added = years_added + 1
+            print("Result:", result)
+            print("$")
+
+    print("Final result:", result)
+    print("Rounded result:", round(result, -2))
 
     return round(result, -2)
 
