@@ -1,6 +1,6 @@
 # Jobs Wizard
 
-[Jobs Wizard](https://www.jobswizard.tech/) aims helping both companies and employees to make better, data-driven decisions with respect to people management.
+[Jobs Wizard](https://www.jobswizard.tech/) aims to help both companies and employees to make better, data-driven decisions with respect to people management.
 
 Leveraging data from the Tech Careers Report Portugal 2021, provided by Landing.Jobs, we devised 4 Machine Learning models (yes, that's right, 4 models!) to tackle 4 main challenges in the People Analytics area.
 
@@ -24,4 +24,4 @@ streamlit run streamlit_app.py
 
 ## Have fun but be socially responsible!
 
-Please remember that any Machine Learning model can fail and their performance is tightly related with the data, both in data quality and data size used for training the models.
+Please remember that any Machine Learning model can fail, and their performance is tightly related to the data, both in data quality and data size used for training the models.
