@@ -136,13 +136,13 @@ def app():
                                 format_func=lambda x: 'Job Role' if x == '' else x)
         employer_industry = st.selectbox("Employer Industry", (sorted(features['Employer_Industry'])),
                                          format_func=lambda x: 'Employer Industry' if x == '' else x)
-        working_experience = st.selectbox("Employee Working Experience", (sorted(features['Working_Experience'])),
+        working_experience = st.selectbox("Employee Working Experience", (features['Working_Experience']),
                                           format_func=lambda x: 'Employee Working Experience' if x == '' else x)
-        employer_size = st.selectbox("Employer Size", (sorted(features['Employer_Size'])),
+        employer_size = st.selectbox("Employer Size", (features['Employer_Size']),
                                      format_func=lambda x: 'Employer Size' if x == '' else x)
         employer_org_type = st.selectbox("Employer Org Type", (sorted(features['Employer_Org_Type'])),
                                          format_func=lambda x: 'Employer Org Type' if x == '' else x)
-        work_company_country = st.selectbox("Employer Original Country", (sorted(features['Work_Company_Country'])),
+        work_company_country = st.selectbox("Employer Original Country", (sorted(features['Work_Company_Country'])), index = 27,
                                             format_func=lambda x: 'Employer Original Country' if x == '' else x)
         years_long = st.slider("Years of Costs Calculation", 1, 5, 3, 1)
         

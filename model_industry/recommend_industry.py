@@ -58,7 +58,7 @@ def app():
     with left_column:
         st.write('Add the profile and preferences and press the button at the end')
         
-        residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])),
+        residence_district = st.selectbox("Residence District", (sorted(features['Residence_District'])), index = 10,
                                           format_func=lambda x: 'Residence District' if x == '' else x)
         age = st.slider("Age (Years)", 16, 67, 42, 1)
         salary_fairness = st.slider("How important is Salary Fairness", 1, 7, 4, 1)

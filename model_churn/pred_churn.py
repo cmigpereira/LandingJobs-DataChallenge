@@ -74,11 +74,11 @@ def app():
         st.write('Add the employee profile and press the button at the end')
         
         salary = st.number_input("Salary", 0, 200000, 20000, 500)
-        salary_change = st.selectbox("Salary Change in last year", (sorted(features['Salary_Change'])),
+        salary_change = st.selectbox("Salary Change in last year", (features['Salary_Change']),
                                      format_func=lambda x: 'Salary Change in last year' if x == '' else x)
         job_role = st.selectbox("Job Role", (sorted(features['Job_Role'])),
                                 format_func=lambda x: 'Job Role' if x == '' else x)
-        residence_district = st.selectbox("Employee Residence District", (sorted(features['Residence_District'])),
+        residence_district = st.selectbox("Employee Residence District", (sorted(features['Residence_District'])), index = 10,
                                           format_func=lambda x: 'Employee Residence District' if x == '' else x)
         employer_industry = st.selectbox("Employer Industry", (sorted(features['Employer_Industry'])),
                                          format_func=lambda x: 'Employer Industry' if x == '' else x)
