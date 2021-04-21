@@ -36,4 +36,4 @@ def app():
     st.markdown('__Use the navigation sidebar in the top left__ to browse through the models. Have fun but be socially responsible!')
     st.write('')
     st.markdown('You can learn more about the models in the *About the models* page.')
-    st.write('Please remember that any Machine Learning model can fail and their quality is tightly related with the data, both in quality and size.')
+    st.write('Please remember that any Machine Learning model can fail and their performance is tightly related with the data, both in data quality and data size used for training the models.')

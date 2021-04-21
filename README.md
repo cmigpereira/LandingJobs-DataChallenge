@@ -17,4 +17,4 @@ You can learn more about each model in the respective *Readme.md* inside each mo
 
 ## Have fun but be socially responsible!
 
-Please remember that any Machine Learning model can fail and their quality is tightly related with the data, both in quality and size.
+Please remember that any Machine Learning model can fail and their performance is tightly related with the data, both in data quality and data size used for training the models.
