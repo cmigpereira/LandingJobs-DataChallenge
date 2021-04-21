@@ -61,7 +61,7 @@ def get_random_string():
         'people who get into the tech industry through `Code Bootcamps` earn, on average, `30% less` than those who have a degree?',
         '`Scale-ups` offer the best salaries? About 50% more than other types of organizations!', 
         'people being paid `under 30k` gross a year always think they are paid `unfairly`?', 
-        'people who do not care about work-life balance have, on average, a 50% higher salary?']
+        'people who do not care about work-life balance have, on average, a `50% higher` salary?']
     return random.choice(sentences)
 
 
