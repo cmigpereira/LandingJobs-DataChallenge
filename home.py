@@ -33,7 +33,7 @@ def app():
         - *Predict Salary*: predict the salary a given employee should be earning today;
         - *Recommend Industry*: recommend employees the best industry to work in.
         """)
-    st.write('Use the navigation sidebar in the left to browse through the models. Have fun but be socially responsible!')
+    st.markdown('__Use the navigation sidebar in the top left__ to browse through the models. Have fun but be socially responsible!')
     st.write('')
     st.markdown('You can learn more about the models in the *About the models* page.')
     st.write('Please remember that any Machine Learning model can fail and their quality is tightly related with the data, both in quality and size.')
