@@ -27,7 +27,6 @@ class MultiApp:
         image = Image.open('images/jobswizard-transp.png')
         image = image.resize((250, 60), Image.ANTIALIAS)
         st.image(image)
-        st.sidebar.write("")
 
         app = st.sidebar.selectbox(
             'Navigation',
