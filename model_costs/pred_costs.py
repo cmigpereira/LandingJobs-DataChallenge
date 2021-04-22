@@ -56,12 +56,12 @@ def process_user_input(df, oe):
 def get_random_string():
     sentences = [
         '`Mobile Apps Developer` role has, on average, a `higher salary` than other developer roles? Contrarily, `Computer & Network Security` roles earn the less.',
-        '`Contractors` earn, on average, `55% more` than Permanent Employees?', 
+        '`Contractors` earn, on average, `55% more` than `Permanent` Employees?', 
         'people in `Lisbon`, on average, earn `2x more` than their counterparts in `Vila Real`? Interestingly enough, people in `Beja` earn almost the same as people in `Lisbon`.', 
         'people who get into the tech industry through `Code Bootcamps` earn, on average, `30% less` than those who have a degree?',
         '`Scale-ups` offer the best salaries? About 50% more than other types of organizations!', 
         'people being paid `under 30k` gross a year always think they are paid `unfairly`?', 
-        'people who do not care about work-life balance have, on average, a `50% higher` salary?']
+        'people who do not care about `work-life balance` have, on average, a `50% higher` salary?']
     return random.choice(sentences)
 
 

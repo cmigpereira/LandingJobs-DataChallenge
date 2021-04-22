@@ -19,7 +19,7 @@ def get_random_string():
         'people who live in `Beja` are the ones who most want to leave the company where they work, followed by those who live in `Bragança`?', 
         'one of the main factors that lead people to churn is `Salary Fairness`?', 
         'one of the main factors that lead people to churn is the `Salary Change` in recent months?', 
-        '`Females` are more likely to leave their jobs in the next few months than `Males`?', 
+        '`Females` are more willing to leave their jobs in the next few months than `Males`?', 
         'people working `In-Office` are more likely to leave their jobs than those working in `Full Remote`?', 
         'people working in `Consultancy` industry are more willing to churn than people working in other industries?']
     return random.choice(sentences)
